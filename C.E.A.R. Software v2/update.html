@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>C.E.A.R. System</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="inStyle.css">
+  </head>
+  <body>
+    <div>
+    <center>
+      <h2>Enter Name of User to Access Profile</h2>
+      <input type="text" name="Name" id="User" required="required"><br>
+      <button type="button" class = "btn btn-secondary" onclick="accessData();">Access</button>
+    </center>
+  </div>
+
+<div style="text-align:center;">
+
+      <p>Name: <strong id="name"></strong></p>
+          <input type="text" class="col-2 text-center"  onfocus="this.value=''" placeholder="name" id = "name1"><br>
+      <p>Age: <strong id="age"></strong></p>
+        <input type="text" class="col-2 text-center"  onfocus="this.value=''" placeholder="age" id = "age1"><br>
+      <p>Address: <strong id="address"></strong></p>
+        <input type="text" class="col-2 text-center" onfocus="this.value=''" placeholder="address" id = "address1"><br>
+      <p>Ailments: <strong id="ailments"></strong></p>
+        <input type="text" class="col-2 text-center" onfocus="this.value=''" placeholder="ailments" id = "ailments1"><br>
+      <p>Prescriptions: <strong id="prescriptions"></strong></p>
+        <input type="text" class="col-2 text-center" onfocus="this.value=''" placeholder="prescriptions" id = "prescriptions1"><br>
+      <p>History: <strong id="history"></strong></p>
+        <input type="text" class="col-2 text-center" onfocus="this.value=''" placeholder="history" id = "history1"><br>
+
+
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase.js"></script>
+      <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+    <script>
+      var firebaseConfig = {
+          apiKey: "AIzaSyCCp0UY6bH4zFOFm05xHb2oCUyXxbq1f4g",
+          authDomain: "test-af35a.firebaseapp.com",
+          databaseURL: "https://test-af35a.firebaseio.com",
+          projectId: "test-af35a",
+          storageBucket: "test-af35a.appspot.com",
+          messagingSenderId: "502940882319",
+          appId: "1:502940882319:web:4dc9ca44298dae926227fa",
+          measurementId: "G-9Y8RX269RQ"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+
+
+      function accessData(){
+        var user = document.getElementById("User").value;
+
+        firebase.database().ref('user/'+user).once('value').then(function(snapshot){
+
+          var username = snapshot.val().name;
+          var userage = snapshot.val().age;
+          var useraddress = snapshot.val().address;
+          var userailments = snapshot.val().ailments;
+          var userprescriptions = snapshot.val().prescriptions;
+          var userhistory = snapshot.val().history;
+
+          document.getElementById("name").innerHTML=username;
+          document.getElementById("age").innerHTML=userage;
+          document.getElementById("address").innerHTML=useraddress;
+          document.getElementById("ailments").innerHTML=userailments;
+          document.getElementById("prescriptions").innerHTML=userprescriptions;
+          document.getElementById("history").innerHTML=userhistory;
+        })
+      }
+
+
+
+function update(){
+  var user = document.getElementById("User").value;
+
+  var name = document.getElementById("name").value;
+  var age = document.getElementById("age").value;
+  var address = document.getElementById("address").value;
+  var prescriptions = document.getElementById("prescriptions").value;
+  var ailments =  document.getElementById("ailments").value;
+  var history =  document.getElementById("history").value;
+
+  var db = firebase.database();
+
+  db.ref('user/'+user).update({
+    name: document.getElementById("name1").value,
+    age: document.getElementById("age1").value,
+    address: document.getElementById("address1").value,
+    prescriptions: document.getElementById("prescriptions1").value,
+    ailments: document.getElementById("ailments1").value,
+    history: document.getElementById("history1").value
+  })
+
+  alert("User Updated");
+}
+
+
+
+    </script>
+  </div>
+
+  </body>
+
+
+
+<div class ="text-center">
+  <button type="button" class = "btn btn-danger btn-lg" onclick="update();">Update Information</button>
+  <button align ="center" type="button" class="btn btn-danger btn-lg" onclick="window.location.href='patientDetails.html'">Back</button>
+</div>
+
+</html>

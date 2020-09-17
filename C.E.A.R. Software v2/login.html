@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>C.E.A.R. System</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="inStyle.css">
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+
+  </head>
+  <body>
+    <div style="text-align:center;">
+      <h1>Login</h1>
+      <div id="form-container" class = "container">
+        <div class = "form-group">
+          <input type="text" placeholder="Email: " class="form-control" id="email">
+          <input type="password" placeholder="Password: " class="form-control" id="password">
+          <button class="btn btn-danger" id="signUpBtn"> Sign Up</button>
+          <button class="btn btn-success" id="signInBtn"> Sign In</button>
+          <button type="button" class="btn btn-warning" onclick="window.open('', '_self', ''); window.close();">Exit Program</button>
+        </div>
+      </div>
+    </div>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>

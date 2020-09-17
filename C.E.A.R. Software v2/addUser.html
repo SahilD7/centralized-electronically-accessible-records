@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>C.E.A.R. System</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="inStyle.css">
+
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase.js"></script>
+
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyCCp0UY6bH4zFOFm05xHb2oCUyXxbq1f4g",
+  authDomain: "test-af35a.firebaseapp.com",
+  databaseURL: "https://test-af35a.firebaseio.com",
+  projectId: "test-af35a",
+  storageBucket: "test-af35a.appspot.com",
+  messagingSenderId: "502940882319",
+  appId: "1:502940882319:web:4dc9ca44298dae926227fa",
+  measurementId: "G-9Y8RX269RQ"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+function writeData(){
+  var name = document.getElementById("nameField").value;
+  var age = document.getElementById("ageField").value;
+  var address = document.getElementById("addField").value;
+  var prescriptions = document.getElementById("drugField").value;
+  var ailments =  document.getElementById("nameIssues").value;
+  var history =  document.getElementById("famHistory").value;
+
+  firebase.database().ref('user/'+name).set({
+      name: document.getElementById("nameField").value,
+      age: document.getElementById("ageField").value,
+      address: document.getElementById("addField").value,
+      prescriptions: document.getElementById("drugField").value,
+      ailments: document.getElementById("nameIssues").value,
+      history: document.getElementById("famHistory").value
+  });
+    getData();
+    alert("Successfully Registered Patient");
+}
+
+function getData(){
+  firebase.database().ref('/').once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot)
+    {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val();
+      document.getElementById("data").innerHTML = childData['name'] + ", " + childData['age'] + ", " + childData['address'] + ", " + childData['history'];
+    })
+
+    })
+
+  }
+
+</script>
+
+  </head>
+
+
+  <body>
+
+    <h1 class="text-center">Register a New Patient</h1>
+    <div id="form-container" class = "container">
+      <form>
+        <input type="text" class = "form-control text-center" onfocus="this.value=''" placeholder="name" id = "nameField">
+        <input type ="text" class = "form-control text-center" onfocus="this.value=''" placeholder="age" id="ageField">
+        <input type ="text" class = "form-control text-center" onfocus="this.value=''" placeholder="address" id="addField">
+        <input type ="text" class = "form-control text-center" onfocus="this.value=''" placeholder="history" id="famHistory">
+        <input type="text" class = "form-control text-center" onfocus="this.value=''" placeholder="prescription" id ="drugField">
+        <input type="text" class = "form-control text-center" onfocus="this.value=''" placeholder="ailment" id ="nameIssues">
+      </form>
+    </div>
+    <div class = "text-center">
+        <button type ="button"  class="btn btn-success btn-lg" onclick ="writeData()">Submit</button>
+        <button type="button" class="btn btn-danger btn-lg" onclick="window.location.href='Options.html'">Back</button>
+    </div>
+
+  </body>
+
+</html>

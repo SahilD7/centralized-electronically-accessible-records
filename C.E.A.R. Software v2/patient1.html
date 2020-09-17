@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>C.E.A.R. System</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="inStyle.css">
+  </head>
+  <body>
+    <center>
+      <h1>John Doe</h1>
+      <button type="button" class = "btn btn-secondary" onclick="accessData();">Access</button>
+    </center>
+
+    <center>
+      <p>Name: <strong id="name"></strong></p>
+        <input type="text" onfocus="this.value=''" placeholder="name" id = "name1"><br>
+      <p>Age: <strong id="age"></strong></p>
+        <input type="text" onfocus="this.value=''" placeholder="age" id = "age1"><br>
+      <p>Address: <strong id="address"></strong></p>
+        <input type="text" onfocus="this.value=''" placeholder="address" id = "address1"><br>
+      <p>Ailments: <strong id="ailments"></strong></p>
+        <input type="text" onfocus="this.value=''" placeholder="ailments" id = "ailments1"><br>
+      <p>Prescriptions: <strong id="prescriptions"></strong></p>
+        <input type="text" onfocus="this.value=''" placeholder="prescriptions" id = "prescriptions1"><br>
+      <p>History: <strong id="history"></strong></p>
+        <input type="text" onfocus="this.value=''" placeholder="history" id = "history1"><br>
+
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase.js"></script>
+      <script src="https://code.jquery.com/jquery-3.1.0.js"></script>

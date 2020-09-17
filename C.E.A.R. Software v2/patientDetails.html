@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>C.E.A.R. System</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="inStyle.css">
+
+  </head>
+
+  <body>
+    <div class="mainDiv" align="center">
+      <h1> Patients </h1>
+      <table class="table">
+        <thead>
+          <tr>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Address</td>
+        <td>Ailments</td>
+        <td>Prescriptions</td>
+        <td>Medical History</td>
+          </tr>
+        </thead>
+        <tbody id="table_body" contenteditable="true">
+
+        </tbody>
+      </table>
+    </div>
+<button align ="center" type="button" class="btn btn-danger btn-lg" onclick="window.location.href='Options.html'">Back</button>
+<button align ="center" type="button" class="btn btn-primary btn-lg" onclick="window.location.href='update.html'">Edit Information</button>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+
+  <script type="text/javascript">
+    var firebaseConfig = {
+        apiKey: "AIzaSyCCp0UY6bH4zFOFm05xHb2oCUyXxbq1f4g",
+        authDomain: "test-af35a.firebaseapp.com",
+        databaseURL: "https://test-af35a.firebaseio.com",
+        projectId: "test-af35a",
+        storageBucket: "test-af35a.appspot.com",
+        messagingSenderId: "502940882319",
+        appId: "1:502940882319:web:4dc9ca44298dae926227fa",
+        measurementId: "G-9Y8RX269RQ"
+    };
+    // Initialize Firebase
+    $(document).ready(function(){
+    firebase.initializeApp(firebaseConfig);
+    //var user=document.getElementById("user").value;
+    var rootRef = firebase.database().ref().child("user");
+
+
+    rootRef.on("child_added", function(snapshot){
+      var name = snapshot.child("name").val();
+      var age = snapshot.child("age").val();
+      var address = snapshot.child("address").val();
+      var ailments = snapshot.child("ailments").val();
+      var prescriptions = snapshot.child("prescriptions").val();
+      var history = snapshot.child("history").val();
+
+
+      $("#table_body").append("<tr id='"+snapshot.key+"'><td>" + name + "</td><td>" + age + "</td><td>" + address + "</td><td>" + ailments + "</td><td>" + prescriptions + "</td><td>" + history +"</td></tr>")
+
+    });
+
+    rootRef.on("child_changed", function(snapshot) {
+      var name = snapshot.child("name").val();
+      var age = snapshot.child("age").val();
+      var address = snapshot.child("address").val();
+      var ailments = snapshot.child("ailments").val();
+      var prescriptions = snapshot.child("prescriptions").val();
+      var history = snapshot.child("history").val();
+
+      $("#table_body"+snapshot.key).replaceWith("<tr id='"+snapshot.key+"'><td>" + name + "</td><td>" + age + "</td><td>" + address + "</td><td>" + ailments + "</td><td>" + prescriptions + "</td><td>"+ history +"</td></tr>")
+
+    });
+
+  });
+  </script>
+
+  </body>
+</html>
